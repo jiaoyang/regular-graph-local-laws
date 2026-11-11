@@ -1,0 +1,6 @@
+Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)
+Passed: 0 compiled, 1371 cached; 1371 modules.
+Kernel audit (--trust=0): replaying both complete registries.
+Kernel replay: 1371 project modules; 13941 safe declarations; 2495 unsafe/partial implementation declarations skipped by Lean.Replay.
+PASSED: every safe declaration from all 1371 project modules replayed through the Lean kernel at trust level zero.
+Passed: Lean kernel audit with --trust=0.

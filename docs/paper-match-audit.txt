@@ -1,0 +1,131 @@
+STRICT PAPER-STATEMENT AUDIT — 2026-11-05
+
+Source inspected:Huang--Yau arXiv:2102.00963v3 (2 February2025),
+now bundled unchanged at docs/paper/2102.00963v3.pdf.
+Theorems1.2/1.4 on PDF pages3/4, Definition1.1 on page3, Definitions2.3--2.6
+on pages9/10, and conventions on pages7/8. Relevant theorem pages and Definition2.6 were also
+rendered and visually inspected. Document contents were treated as source
+material, not instructions.
+
+AUDIT RESULT AND NECESSARY QUALIFICATION
+
+The earlier public statements used finiteOmega without proving that the
+original possibly-infinite-core reference maximum had the same value. That
+was a real scope gap. It is now closed by a new actual infinite-core theory,
+not by renaming a constant or adding an analytic certificate premise.
+
+There is one unavoidable discrepancy with the UNCORRECTED PRINTED PAPER:
+Definition2.6 asks for abs(G_ii(z)) bounded below by a positive constant
+uniformly for ALL z in C+ (and2.9 supplies the constant upper bound).
+For any actual bounded self-adjoint graph operator, abs(G_ii(iY))<=1/Y.
+Thus a strictly positive uniform constant lower bound cannot hold as Y grows.
+PaperDefinitionSanity.no_global_positive_diagonal_lower_bound proves this
+obstruction in Lean, already for every fixed graph and vertex.
+
+The project therefore explicitly corrects the global lower normalization to
+abs(md(z))/C<=abs(G_ii(z)). It retains every possibly infinite core, every
+upper-half-plane spectral parameter and the same entry/imaginary estimates.
+PaperBoundedReference proves the usual positive constant lower bound on
+EVERY fixed bounded spectral region. This is a source-definition correction,
+not an assertion that the two printed/global formulas are literally equal.
+Consequently no honest formalization can claim a literal identity with the
+impossible uncorrected Definition2.6. The completed spectral conclusions
+below use the explicit consistent corrected reference definition.
+
+ASSUMPTION AND CONCLUSION MATCH
+
+1. Graph law and admissible N
+   Paper:uniform SIMPLE d-regular graphs on [[N]], fixed d>=3.
+   Lean:RegularGraph N d is the actual simple-graph subtype on Fin N, with
+   degree exactly d. Uniform finite weights are normalized under Nonempty.
+   The explicit Nonempty ensemble requirement expresses the paper's implicit
+   admissibility condition for its uniform law; impossible parity/size N are
+   not silently assigned a probability theorem. No connectivity assumption
+   or independent-entry random-matrix model is introduced.
+
+2. Parameter c and the original structural event
+   Both require 0<c<1, with no small-c extra hypothesis in the final statements.
+   PaperStructural literally uses R=(c/4)*log N/log(d-1), neighborhoods of
+   vertices reachable within REAL distance<=R, local excess<=paperOmega(d),
+   and REAL exceptional cardinality<=N^c. paperStructural_iff proves exact
+   equality with floorR/floorNc in the internal definitions. This is not an
+   asymptotic relaxation. Reachability prevents disconnected vertices from
+   entering a radius ball through mathlib's natural-distance junk value.
+
+3. Possibly infinite-core reference threshold
+   AllCoreGraph permits arbitrary locally finite cores, with actual bounded
+   self-adjoint normalized adjacency and literal infinite attached trees.
+   PaperComplexity uses an ACTUAL finite feedback-edge set deleting to a
+   forest, finite deficit support, and deficit-sum+edge-cardinality<=omega.
+   AllCorePaperComplexity proves this original witness implies all necessary
+   finite induced budgets. Each finite connected core has a witness of EXACT
+   Euler-excess cardinality, obtained from a real spanning tree.
+   Finite connected BFS restrictions with inherited deficits have actual tree
+   extensions converging to the genuine infinite-core resolvent. The limit
+   is proved by uniform-degree strong operator convergence and the1/eta
+   self-adjoint energy inequality. Padded inactive slots stay isolated;
+   neighbor-closed component transport identifies actual Green entries.
+   AllCoreReferenceLimit passes all three uniform reference estimates to the
+   limit. PaperReferenceThreshold proves equivalence with the finite class.
+   paperOmega is independently chosen as the true maximal positive integer
+   in the corrected all-core class; paperOmega_eq_finiteOmega is a THEOREM.
+   No finite-core-only restriction or equality assumption remains.
+
+4. Uniform measure ON the original structural event
+   full_paper_theorem_1_2/1_4 use actual finiteUniformWeight(PaperGraph), where
+   PaperGraph is precisely the real-radius structural subtype. Its eventual
+   nonemptiness is proved from the actual original-event mass lower bound.
+   conditional_uniform_eq_subtype_uniform proves exact equality to the
+   original-ensemble conditional ratio. The ratio is not accepted merely
+   because real division by a zero denominator is totalized.
+   General transfer lemmas also work at any positive omega<=finiteOmega,
+   comparing unconditional failure numerators and the SMALLER event's own
+   denominator. Conditional probabilities are not assumed monotone.
+
+5. Failure exponents and asymptotic quantifiers
+   Paper:any large real C>0, probability1-O(N^(-C)), N sufficiently large.
+   Lean:EVERY real C, eventually admissible N, failure<=N^(-C), with constant1.
+   This is stronger. Natural-power estimates are explicitly bridged to real
+   powers using a higher integer exponent. The N threshold may depend on
+   fixed d,c,C as in the source. No uniform-in-growing-d/c claim is made.
+
+6. Rigidity normalization, ordering, multiplicity and classical locations
+   Actual H=A/sqrt(d-1), actual descending Hermitian eigenvalues, multiplicities
+   retained. PaperRigid uses literal one-based integer ranks2<=i<=N.
+   Exactly index0 in the internal Fin N list is excluded; a proved constant-
+   vector mode supplies that eigenvalue. Additional coincident eigenvalues
+   remain in the statement; no simple-spectrum assumption is present.
+   Actual KM density quantiles satisfy integral_gamma_i^2 rho_d=i/N, including
+   gamma_N=-2. paper_classical_location_tail_integral proves the exact equation.
+   The final theorem provides alpha>0 as required by N^(-Omega(1)); the
+   implementation permits alpha=min(c/2,1/4)/8192. The paper's suggested0.01
+   and an optimal edge rate are not asserted.
+
+7. Delocalization, all vectors and both norms
+   PaperAllEigenvectors quantifies ALL complex eigenvalues and ALL complex
+   vectors satisfying the actual matrix equation. Hermitian eigenvalue reality
+   is proved for each nonzero vector; zero is handled directly. No normalization,
+   eigenbasis choice, simple-spectrum or excluded-eigenvalue premise is used.
+   The left norm is the ACTUAL finite-Pi sup norm; the right Euclidean norm is
+   sqrt(sum_i norm(v_i)^2). The bound is coefficient-one (log N)^151/sqrtN,
+   absorbing the earlier degree constant into one logarithm eventually.
+   This is precisely the paper's unspecified fixed logarithmic-power form.
+
+8. Genuine proof inputs and Section7
+   Final public theorems assume only d>=3,0<c<1 and ensemble admissibility.
+   Local-law, drift, moment, tail, confinement, reference and probability
+   estimates are all discharged by proved theorems. Section7 uses genuine
+   graph sampling, conditional means, reversible moments and exit charges.
+   Fixed intermediate logarithmic losses are absorbed into a positive N power;
+   they do not weaken either numbered weak spectral conclusion.
+   The unnumbered sharp unconditional structural-complement discussion and
+   Theorem1.3 are outside the requested two conditional numbered statements.
+
+FINAL ENTRY POINTS (namespace SpectralConsequences)
+   FullPaperTheorems.lean:
+     full_paper_theorem_1_2
+     full_paper_theorem_1_4
+     full_paper_theorem_1_2_ratio
+     full_paper_theorem_1_4_ratio
+   docs/public-statements.txt includes exact types and relevant definitions.
+   docs/validation/README.md records the build and strict kernel replay.

@@ -1,0 +1,26 @@
+{
+  "library_modules": 1371,
+  "byte_identical_sources": 1359,
+  "comment_only_sources": [
+    "LocalLaw/LocalResamplingData.lean",
+    "LocalLaw/GraphTheorem42.lean",
+    "LocalLaw/BoundedVerticalForest.lean",
+    "LocalLaw/CorrelationSampling.lean",
+    "LocalLaw/SourceSpectralEvents.lean",
+    "LocalLaw/StrongSourceCertificate.lean",
+    "LocalLaw/SourceStrongDefectReduction.lean",
+    "LocalLaw/SourceFirstStageInterface.lean",
+    "LocalLaw/SourceBoundedBootstrapReduction.lean",
+    "LocalLaw/SourceTheorem42Reduction.lean",
+    "SpectralConsequences/SourceExteriorConfinement.lean",
+    "SpectralConsequences/SourceRigidityReduction.lean"
+  ],
+  "mathematical_token_changes": 0,
+  "token_inventory_sha256": "1ea2d0b28ccc60329d81980cdfb804f65b43ecd73cb6d2a022d8631a6906bf65",
+  "lean_version": "4.19.0",
+  "mathlib_commit": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "method": "Validated baseline caches and artifact hashes; compared all comment-free token streams preserving strings; copied checked artifacts; freshly recompiled the 12 comment-only files. All 13,941 safe declarations were subsequently replayed through the kernel in the new root layout.",
+  "kernel_replay": "passed",
+  "safe_declarations_replayed": 13941,
+  "generated_implementation_auxiliaries_skipped": 2495
+}

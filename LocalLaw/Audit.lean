@@ -1,0 +1,104 @@
+import LocalLaw.Main
+
+-- Current principal contracts. Historical queries: AuditHistory.txt.
+-- Expected foundations: propext, Classical.choice, Quot.sound.
+
+#print axioms LocalLaw.Theorem42Inputs.generalized_theorem_4_2_rate
+
+#print axioms LocalLaw.GraphLocalLawInputs.graph_theorem_4_2_polynomial_rate
+
+#print axioms LocalLaw.semicircleRoot_physical
+
+#print axioms LocalLaw.ball_labelled_resampling_stationary
+
+#print axioms LocalLaw.eventually_original_structural_mass_half
+
+#print axioms LocalLaw.finiteOmega_reference_bounds
+
+#print axioms LocalLaw.DeficientGraph.finite_model_localization
+
+#print axioms LocalLaw.RegularGraph.effective_reference_radius_correction
+
+#print axioms LocalLaw.RegularGraph.eventually_sourceOmegaWithRadii_subset_sourceOmegaPlusWithRadii
+
+#print axioms LocalLaw.eventually_ballResampling_geometry_failure
+
+#print axioms LocalLaw.RegularGraph.eventually_sourceSingletonObservation_concentration
+
+#print axioms LocalLaw.eventually_ballSourceFinalAnalyticBad_probability
+
+#print axioms LocalLaw.RegularGraph.eventually_source_complete_strong_certificate
+
+#print axioms LocalLaw.eventually_actual_second_stage_strong_certificate_probability
+
+#print axioms LocalLaw.actual_strong_local_certificate_closure
+
+#print axioms LocalLaw.eventually_strong_source_closure_inputs
+
+#print axioms LocalLaw.actual_strong_graph_resampling_defect_restricted
+
+#print axioms LocalLaw.eventually_offset_original_failure_transfer
+
+#print axioms LocalLaw.DeficientGraph.treeExtensionGreen_eq_extensionGreen
+
+#print axioms LocalLaw.RegularGraph.eventually_source_outside_model_column
+
+#print axioms LocalLaw.RegularGraph.eventually_source_inside_row
+
+#print axioms LocalLaw.RegularGraph.eventually_source_cavity_average_certificate
+
+#print axioms LocalLaw.RegularGraph.eventually_source_retained_nonlinear_remainder
+
+#print axioms LocalLaw.semicircleStieltjes_eq_root
+
+#print axioms LocalLaw.LabelledResamplingState.eventually_selected_fullResample_cavity_change_edges_small
+
+#print axioms LocalLaw.kestenMcKayStieltjes_eq_transform
+
+#print axioms LocalLaw.source_reference_threshold_le_finiteOmega
+
+#print axioms LocalLaw.RegularGraph.eventually_source_fullEndpoint_green_caps
+
+#print axioms LocalLaw.eventually_source_strong_defect_reduction
+
+#print axioms LocalLaw.source_theorem_4_2_of_first_stage
+
+#print axioms LocalLaw.sourceFirstStageAllPowers_of_comparison_family
+
+#print axioms LocalLaw.RegularGraph.eventually_source_full_partial_endpoint_caps
+
+#print axioms LocalLaw.RegularGraph.eventually_source_full_boundary_change
+
+#print axioms LocalLaw.RegularGraph.eventually_firstStage_packet_of_frozen
+
+#print axioms LocalLaw.RegularGraph.eventually_source_common_leaf_localization
+
+#print axioms LocalLaw.RegularGraph.eventually_source_partial_first_principal_caps
+
+#print axioms LocalLaw.RegularGraph.eventually_source_full_common_surgery
+
+#print axioms LocalLaw.sourceFirstStageAllPowers_of_frozen_comparisons
+
+#print axioms LocalLaw.RegularGraph.eventually_source_partial_inner_endpoint_caps
+
+#print axioms LocalLaw.RegularGraph.eventually_source_deleted_frozen_comparison
+
+#print axioms LocalLaw.RegularGraph.eventually_source_partial_inner_mapped_rows
+
+#print axioms LocalLaw.RegularGraph.eventually_source_omitted_inner_rows
+
+#print axioms LocalLaw.RegularGraph.eventually_source_full_far_inner_restoration
+
+#print axioms LocalLaw.RegularGraph.eventually_source_full_common_far_inner_restoration
+
+#print axioms LocalLaw.source_full_exterior_comparison_family
+
+#print axioms LocalLaw.RegularGraph.source_full_frozen_comparison
+
+#print axioms LocalLaw.source_first_stage_frozen_comparison_family
+
+#print axioms LocalLaw.source_first_stage_all_powers
+
+#print axioms LocalLaw.source_theorem_4_2_of_reference_threshold
+
+#print axioms LocalLaw.source_theorem_4_2

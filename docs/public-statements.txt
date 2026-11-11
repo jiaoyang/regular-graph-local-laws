@@ -1,0 +1,125 @@
+SpectralConsequences.full_paper_theorem_1_2 (d : ℕ) (c : ℝ) (hd : 3 ≤ d) (hc : 0 < c) (hc1 : c < 1) :
+  ∃ α,
+    0 < α ∧
+      ∀ (C : ℝ),
+        ∀ᶠ (N : ℕ) in Filter.atTop,
+          Nonempty (LocalLaw.RegularGraph N d) →
+            Nonempty (SpectralConsequences.PaperGraph N d c) ∧
+              (LocalLaw.eventMass (LocalLaw.finiteUniformWeight (SpectralConsequences.PaperGraph N d c)) fun g =>
+                  ¬SpectralConsequences.PaperRigid hd α ↑g) ≤
+                1 / ↑N ^ C
+SpectralConsequences.full_paper_theorem_1_4 (d : ℕ) (c : ℝ) (hd : 3 ≤ d) (hc : 0 < c) (hc1 : c < 1) (C : ℝ) :
+  ∀ᶠ (N : ℕ) in Filter.atTop,
+    Nonempty (LocalLaw.RegularGraph N d) →
+      Nonempty (SpectralConsequences.PaperGraph N d c) ∧
+        (LocalLaw.eventMass (LocalLaw.finiteUniformWeight (SpectralConsequences.PaperGraph N d c)) fun g =>
+            ¬SpectralConsequences.PaperAllEigenvectors ↑g) ≤
+          1 / ↑N ^ C
+SpectralConsequences.full_paper_theorem_1_2_ratio (d : ℕ) (c : ℝ) (hd : 3 ≤ d) (hc : 0 < c) (hc1 : c < 1) :
+  ∃ α,
+    0 < α ∧
+      ∀ (C : ℝ),
+        ∀ᶠ (N : ℕ) in Filter.atTop,
+          Nonempty (LocalLaw.RegularGraph N d) →
+            (LocalLaw.eventMass LocalLaw.RegularGraph.weight fun g =>
+                  SpectralConsequences.PaperStructural c (SpectralConsequences.paperOmega d) g ∧
+                    ¬SpectralConsequences.PaperRigid hd α g) /
+                LocalLaw.eventMass LocalLaw.RegularGraph.weight
+                  (SpectralConsequences.PaperStructural c (SpectralConsequences.paperOmega d)) ≤
+              1 / ↑N ^ C
+SpectralConsequences.full_paper_theorem_1_4_ratio (d : ℕ) (c : ℝ) (hd : 3 ≤ d) (hc : 0 < c) (hc1 : c < 1) (C : ℝ) :
+  ∀ᶠ (N : ℕ) in Filter.atTop,
+    Nonempty (LocalLaw.RegularGraph N d) →
+      (LocalLaw.eventMass LocalLaw.RegularGraph.weight fun g =>
+            SpectralConsequences.PaperStructural c (SpectralConsequences.paperOmega d) g ∧
+              ¬SpectralConsequences.PaperAllEigenvectors g) /
+          LocalLaw.eventMass LocalLaw.RegularGraph.weight
+            (SpectralConsequences.PaperStructural c (SpectralConsequences.paperOmega d)) ≤
+        1 / ↑N ^ C
+SpectralConsequences.paperOmega_positive (d : ℕ) (hd : 3 ≤ d) : 1 ≤ SpectralConsequences.paperOmega d
+SpectralConsequences.paperOmega_good (d : ℕ) (hd : 3 ≤ d) :
+  SpectralConsequences.PaperReferenceThreshold d (SpectralConsequences.paperOmega d) ⋯
+SpectralConsequences.paperOmega_eq_finiteOmega (d : ℕ) (hd : 3 ≤ d) :
+  SpectralConsequences.paperOmega d = LocalLaw.finiteOmega d
+SpectralConsequences.paper_classical_location_tail_integral (d : ℕ) (hd : 3 ≤ d) {N : ℕ} (i : ℕ) (hi : 2 ≤ i)
+  (hiN : i ≤ N) :
+  let j := ⟨i - 1, ⋯⟩;
+  ∫ (x : ℝ) in SpectralConsequences.classicalLocation d hd j..2, LocalLaw.kestenMcKayDensity d x = ↑i / ↑N
+SpectralConsequences.paperStructural_iff {N d : ℕ} (c : ℝ) (ω : ℕ) (g : LocalLaw.RegularGraph N d) (hd : 3 ≤ d)
+  (hN : 1 ≤ N) (hc : 0 ≤ c) :
+  SpectralConsequences.PaperStructural c ω g ↔
+    LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) ω ⌊↑N ^ c⌋₊ g
+SpectralConsequences.conditional_uniform_eq_subtype_uniform.{u_1} {X : Type u_1} [Fintype X] (A P : X → Prop)
+  [Nonempty { x // A x }] :
+  (LocalLaw.eventMass (LocalLaw.finiteUniformWeight X) fun x => A x ∧ P x) /
+      LocalLaw.eventMass (LocalLaw.finiteUniformWeight X) A =
+    LocalLaw.eventMass (LocalLaw.finiteUniformWeight { x // A x }) fun x => P ↑x
+SpectralConsequences.no_global_positive_diagonal_lower_bound {V : Type} [DecidableEq V] (G : SimpleGraph V)
+  [G.LocallyFinite] (d : ℕ) (hD : ∀ (v : V), G.degree v ≤ d) (i : V) :
+  ¬∃ a, 0 < a ∧ ∀ (z : ℂ), 0 < z.im → a ≤ ‖G.infiniteGreen d hD z i i‖
+SpectralConsequences.allCore_reference_bounded_diagonal (d ω : ℕ) (hd : 3 ≤ d)
+  (hclass : SpectralConsequences.AllCoreReferenceThreshold d ω ⋯) :
+  ∃ C,
+    1 ≤ C ∧
+      ∀ (V : Type) [inst : DecidableEq V] (g : SpectralConsequences.AllCoreGraph V d),
+        g.graph.Connected →
+          g.HereditaryBudget ω →
+            ∀ (z : ℂ),
+              0 < z.im → ∀ (B : ℝ), ‖z‖ ≤ B → ∀ (i : V), 1 / (B + 2) / C ≤ ‖g.green ⋯ z i i‖ ∧ ‖g.green ⋯ z i i‖ ≤ C
+def SpectralConsequences.PaperRigid : {N d : ℕ} → 3 ≤ d → ℝ → LocalLaw.RegularGraph N d → Prop :=
+fun {N d} hd α g =>
+  ∀ (i : ℕ) (hi : 2 ≤ i) (hiN : i ≤ N),
+    let j := ⟨i - 1, ⋯⟩;
+    |SpectralConsequences.sortedEigenvalues ⋯ j - SpectralConsequences.classicalLocation d hd j| ≤ ↑N ^ (-α)
+def SpectralConsequences.PaperAllEigenvectors : {N d : ℕ} → LocalLaw.RegularGraph N d → Prop :=
+fun {N d} g => ∀ (eig : ℂ) (v : Fin N → ℂ), g.H.mulVec v = eig • v → ‖v‖ ≤ Real.log ↑N ^ 151 / √↑N * √(∑ j, ‖v j‖ ^ 2)
+def SpectralConsequences.PaperStructural : {N d : ℕ} → ℝ → ℕ → LocalLaw.RegularGraph N d → Prop :=
+fun {N d} c ω g =>
+  (∀ (o : Fin N),
+      LocalLaw.graphExcess (SpectralConsequences.paperBall g.graph o (SpectralConsequences.paperRadius d N c)) ≤ ω) ∧
+    ↑{o | ¬(SpectralConsequences.paperBall g.graph o (SpectralConsequences.paperRadius d N c)).IsTree}.card ≤ ↑N ^ c
+def SpectralConsequences.PaperReferenceThreshold : (d : ℕ) → ℕ → 1 ≤ d → Prop :=
+fun d ω hd =>
+  ∃ C,
+    1 ≤ C ∧
+      ∀ (V : Type) [inst : DecidableEq V] (g : SpectralConsequences.AllCoreGraph V d),
+        g.graph.Connected →
+          g.PaperComplexity ω →
+            ∀ (z : ℂ),
+              0 < z.im →
+                (∀ (i j : V),
+                    ‖g.green hd z i j‖ ≤
+                      C * ‖-LocalLaw.semicircleRoot z * LocalLaw.treeEdgeWeight d‖ ^ g.graph.dist i j) ∧
+                  (∀ (i j : V),
+                      |(g.green hd z i j).im| ≤
+                        C * (LocalLaw.kestenMcKayTransform d (LocalLaw.semicircleRoot z) z).im) ∧
+                    ∀ (i : V), ‖LocalLaw.kestenMcKayTransform d (LocalLaw.semicircleRoot z) z‖ / C ≤ ‖g.green hd z i i‖
+structure SpectralConsequences.AllCoreGraph.PaperComplexityWitness {V : Type} {d : ℕ}
+  (g : SpectralConsequences.AllCoreGraph V d) (ω : ℕ) : Type
+number of parameters: 4
+fields:
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.deficitSet : Finset V
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.deficit_zero : ∀ v ∉ self.deficitSet, g.deficit v = 0
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.feedbackEdges : Finset (Sym2 V)
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.feedback_actual : ∀ e ∈ self.feedbackEdges,
+      e ∈ g.graph.edgeSet
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.feedback_forest : (g.graph.deleteEdges
+        ↑self.feedbackEdges).IsAcyclic
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.budget : ∑ v ∈ self.deficitSet, g.deficit v +
+        self.feedbackEdges.card ≤
+      ω
+constructor:
+  SpectralConsequences.AllCoreGraph.PaperComplexityWitness.mk {V : Type} {d : ℕ}
+    {g : SpectralConsequences.AllCoreGraph V d} {ω : ℕ} (deficitSet : Finset V)
+    (deficit_zero : ∀ v ∉ deficitSet, g.deficit v = 0) (feedbackEdges : Finset (Sym2 V))
+    (feedback_actual : ∀ e ∈ feedbackEdges, e ∈ g.graph.edgeSet)
+    (feedback_forest : (g.graph.deleteEdges ↑feedbackEdges).IsAcyclic)
+    (budget : ∑ v ∈ deficitSet, g.deficit v + feedbackEdges.card ≤ ω) : g.PaperComplexityWitness ω
+'SpectralConsequences.full_paper_theorem_1_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.full_paper_theorem_1_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.full_paper_theorem_1_2_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.full_paper_theorem_1_4_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.paperOmega_eq_finiteOmega' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.no_global_positive_diagonal_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

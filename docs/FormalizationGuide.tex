@@ -1,0 +1,374 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem,booktabs,longtable,array}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\hypersetup{pdftitle={Local laws, delocalization, and weak rigidity: formalization guide},pdfsubject={Checked source theorems and explicit project validation status}}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,keepspaces=true}
+\setlist{nosep,leftmargin=1.5em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Formalization guide}
+\fancyhead[R]{\small Source guide: 5 November 2026}
+\fancyfoot[C]{\thepage}
+\newcommand{\code}[1]{\texttt{\small\detokenize{#1}}}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\F}{\mathcal F}
+\newcommand{\Om}{\Omega}
+\newcommand{\im}{\operatorname{Im}}
+\newcommand{\supp}{\operatorname{supp}}
+% Flip only after the final integrated Lean project check succeeds.
+\newif\ifIntegratedAudit
+\IntegratedAudittrue
+\newcommand{\auditstatus}{\ifIntegratedAudit Paper-form theorems and independent kernel replay checked\else Paper-form theorems checked; fresh kernel replay pending\fi}
+\newcommand{\publicationstatus}{\ifIntegratedAudit
+\textbf{Validation.} The independent integrated rebuild and trust-level-zero kernel replay have passed.
+\else
+\textbf{Publication gate.} The paper-form source declarations have compiled. The updated
+integrated rebuild and trust-level-zero kernel replay must pass before this guide is published.
+\fi}
+\begin{document}
+\begin{center}
+  {\LARGE\bfseries Local laws, delocalization, and weak rigidity}\\[5pt]
+  {\large A mathematical and Lean formalization guide}\\[5pt]
+  {\small \auditstatus}
+\end{center}
+
+\colorbox{gray!10}{\parbox{\dimexpr\linewidth-2\fboxsep}{\small
+\textbf{Checked paper-form statements.} Weak rigidity and all-vector delocalization use the
+literal structural event and its actual conditional uniform measure. A necessary correction
+to reference Definition 2.6 is stated below and proved consistent with the finite reference
+class. The main spectral declarations have no analytic certificate hypotheses. \publicationstatus}}
+
+\section{Objects, conditioning, and the scope of the reference class}
+
+Fix an integer $d\geq3$. The probability space is the genuine uniform finite set of simple
+$d$-regular graphs on $\{0,\ldots,N-1\}$. Ensemble nonemptiness is explicit in the source
+theorems. Write $H=A/\sqrt{d-1}$ and $G(z)=(H-z)^{-1}$ for $\im z>0$.
+The paper's real-radius structural event is
+\[
+ \begin{gathered}
+ \F_N(c,\omega)=\left\{\max_v\operatorname{excess}(B_R(v))\leq\omega,
+ \quad\#\{v:B_R(v)\text{ is not a tree}\}\leq N^c\right\},\\[2pt]
+ R=\frac{c\log N}{4\log(d-1)},\qquad 0<c<1.
+ \end{gathered}
+\]
+Because graph distances and vertex counts are integers, the real-radius balls and the
+real count bound are proved exactly equivalent to the integer-floor definitions used by
+the local-law development. The final probability statement is under the actual uniform
+law on the structural subtype: for every fixed real $C>0$, eventually in admissible $N$,
+\[
+ \PP_{\operatorname{Unif}(\F_N)}(\text{failure})
+ =\frac{\PP(\F_N\cap\{\text{failure}\})}{\PP(\F_N)}\leq N^{-C}.
+ \tag{1}
+\]
+The event has mass at least $1/2$ eventually, so its nonemptiness and the denominator's
+positivity are proved. The final wrappers require no nonemptiness assumption on this
+structural subtype beyond eventual nonemptiness of the original regular-graph ensemble.
+
+\textbf{Necessary correction to Definition 2.6.}
+Its printed estimate (2.10), $|G_{ii}(z)|\gtrsim1$ for \emph{all} $z\in\mathbb C_+$, is impossible:
+the genuine self-adjoint resolvent satisfies $|G_{ii}(\mathrm iY)|\leq1/Y$.
+The theorem \code{no_global_positive_diagonal_lower_bound} proves this obstruction.
+The global reference class therefore uses
+$|m_d(z)|/C_d\leq |G_{ii}(z)|$; it recovers constant lower and upper diagonal bounds on
+every fixed bounded spectral region. This correction is explicit, rather than a claim that
+the inconsistent printed definition was formalized unchanged.
+
+The corrected \code{PaperReferenceThreshold} quantifies all connected, possibly infinite
+cores with finite deficit support and an actual finite feedback-edge set whose deletion
+leaves a forest. Their deficit sum plus feedback-edge count is at most $\omega$.
+Its Green function is the genuine $\ell^2$ resolvent of the literal infinite tree extension.
+Finite induced approximations, neighbor-closed embeddings, and strong resolvent convergence
+prove that this all-core class is equivalent to \code{FiniteReferenceThreshold}.
+The positive integer \code{paperOmega d} is independently defined as the maximum of this
+all-core class; the equality \code{paperOmega_eq_finiteOmega} is then proved.
+The final structural event uses this maximum, with no reference-class hypothesis left over.
+
+\begin{lstlisting}
+SpectralConsequences.paperReferenceThreshold_iff_finite
+SpectralConsequences.paperOmega_eq_finiteOmega
+SpectralConsequences.allCore_reference_bounded_diagonal
+SpectralConsequences.paperStructural_iff
+SpectralConsequences.conditional_uniform_eq_subtype_uniform
+\end{lstlisting}
+The semicircle and Kesten--McKay density Stieltjes integrals are also identified with the
+actual scalar roots, rather than postulated.
+
+\section{Theorem 4.2 supplies the source local law}
+
+The existing \code{LocalLaw} project is the foundation. Its main declaration is
+\begin{lstlisting}
+LocalLaw.source_theorem_4_2
+LocalLaw.source_theorem_4_2_of_reference_threshold
+\end{lstlisting}
+It permits real $a,b$ with $a\geq12$ and $b\geq25a$, and $0<\beta\leq c/32$.
+The conclusion is uniform over the upper-half-plane domain
+$\im z\geq (\log N)^b/N$, with the actual nominal model radius
+$r_{\rm nom}=\lfloor\beta\log N/\log(d-1)\rfloor$ and the article's actual error.
+All first- and second-stage graph resampling estimates used by this theorem are proved.
+No local-law, concentration, model-comparison, or resampling certificate is a hypothesis of
+its primary source declaration.
+
+The proof uses a shorter internal model radius, losing $O(\log\log N)$ layers.
+It keeps the nominal error fixed, avoiding comparisons across the discontinuous
+error-inflation branches.
+
+\section{Theorem 1.4: all eigenvectors from Ward's identity}
+
+For a Hermitian matrix and an arbitrary eigenpair $Hv=\lambda v$, the proved deterministic
+criterion is
+\[
+ |v_i|^2\leq \eta\,\im G_{ii}(\lambda+\mathrm i\eta)
+                  \sum_j|v_j|^2,\qquad \eta>0.
+ \tag{2}
+\]
+It includes the zero vector and does not assume a chosen eigenbasis or a simple eigenvalue.
+The source local law gives a degree-dependent uniform diagonal cap. With $a=12$, $b=300$,
+and $\eta=(\log N)^{300}/N$, this yields simultaneously for every eigenpair
+\[
+ |v_i|^2\leq C_d\frac{(\log N)^{300}}{N}\sum_j|v_j|^2 .
+ \tag{3}
+\]
+Consequently, every normalized eigenvector satisfies
+$\|v\|_\infty\leq\sqrt{C_d}(\log N)^{150}/\sqrt N$.
+Absorbing the fixed degree-dependent constant into one more logarithm gives the literal
+homogeneous conclusion
+\[
+ \|v\|_\infty\leq\frac{(\log N)^{151}}{\sqrt N}\,\|v\|_2 .
+\]
+The final predicate quantifies \emph{all complex eigenvalues and all complex vectors};
+Hermitian reality is proved for nonzero eigenvectors, and the zero vector is handled
+separately. No normalization, chosen eigenbasis, or simple-eigenvalue hypothesis is needed.
+The conclusion satisfies (1) on the literal structural subtype at \code{paperOmega d}.
+Its canonical wrapper takes only $d$, $c$, their numerical inequalities, and eventual
+ensemble nonemptiness; the auxiliary $\beta$ is selected internally.
+
+\begin{lstlisting}
+SpectralConsequences.eigenvector_coordinate_sq_le_green_im_mul_sum
+SpectralConsequences.paperAllEigenvectors_iff_paperDelocalized
+SpectralConsequences.full_paper_theorem_1_4
+SpectralConsequences.full_paper_theorem_1_4_ratio
+\end{lstlisting}
+The deterministic criterion is in \code{EigenvectorWard.lean}. The source local-law
+application, constant absorption, unrestricted complex-eigenpair statement, and literal
+conditional uniform law are connected in the subsequent paper-form wrappers.
+
+\section{Counting, quantiles, and the distinction from confinement}
+
+The sorted eigenvalues are in decreasing order, with multiplicities retained.
+The constant vector supplies the distinguished index $0$ eigenvalue
+$\tau_d=d/\sqrt{d-1}$. The other indices remain in the empirical measure even if their
+value also equals $\tau_d$.
+
+The actual Kesten--McKay density is normalized to mass one. Its compact CDF is continuous,
+monotone, and strictly increasing in the interior. The reference-mass estimate
+\[
+ F_d(y)-F_d(x)\geq c_*|y-x|^{3/2},\qquad -2\leq x\leq y\leq2,
+\]
+provides an inverse $2/3$ modulus for its quantiles. Poisson smoothing converts the trace
+part of Theorem 4.2 into a uniform empirical-CDF bound; one checked source consequence is
+\[
+ \sup_E|F_N(E)-F_d(E)|\leq N^{-\beta/8}
+\]
+with every polynomial conditional failure power.
+
+A CDF estimate alone controls clamped eigenvalues, not outliers. The deterministic rigidity
+step explicitly also requires confinement. In a general form, CDF error $\delta$ and
+confinement error $e$ imply
+\[
+ |\lambda_i-\gamma_i|\leq e+(\delta/c_*)^{2/3}.
+ \tag{4}
+\]
+In zero-based Lean indexing, the classical locations satisfy
+$F_d(\gamma_i)=(N-1-i)/N$. These are the exact source index levels after translating
+the article's one-based indexing. For one-based $2\leq i\leq N$, the exact identity
+$\int_{\gamma_i}^{2}\rho_d(x)\,dx=i/N$ is proved, including $\gamma_N=-2$.
+The source confinement event excludes only index $0$. It does not discard every occurrence
+of the regular eigenvalue or assume connectedness.
+
+\begin{lstlisting}
+SpectralConsequences.source_counting_rate
+SpectralConsequences.empiricalCDF_error_of_trace_sqrt
+SpectralConsequences.SquareRootCDF.inverse_modulus
+SpectralConsequences.SquareRootCDF.rigidity_of_cdf_and_confinement
+SpectralConsequences.RegularGraph.correctedSourceTrace_eq_positive_sum
+\end{lstlisting}
+The generic inverse-modulus and confinement-to-rigidity lemmas are in
+\code{QuantileRigidity.lean}; the source counting wrapper is in
+\code{SourceCountingProbability.lean}.
+
+\section{Section 7: physical fluctuations and reversible moments}
+
+\subsection{The observables and the trivial mode}
+
+Let $q=Q(G,z)$ be the physical averaged oriented cavity observable, let $m=m_{\rm sc}(z)$,
+and let $m_d$ be the Kesten--McKay transform. The depth $\ell$ is selected by the actual
+nonresonance rule. The finite cavity and full-root references are
+$Y_\ell(q)=\operatorname{cavityIterate}(z,q,\ell+1)$ and $X_\ell(q)$.
+The two corrected physical residuals are
+\[
+ F_Q=q-Y_\ell(q)-\delta_Q,\qquad
+ F_m=m_N-X_\ell(q)-\delta_m .
+\]
+The corrections are explicit physical tree-weight multiples of
+$\pi_N(z)=N^{-1}(\tau_d-z)^{-1}$. Tree root-to-boundary columns, the exact number of
+boundary labels, and the active labels after deleting a root neighbor are all proved for
+the actual graph balls. Thus $\delta_Q$ and $\delta_m$ are identified with genuine
+boundary-weight sums, including their multiplicities and zero inactive branches.
+
+Subtracting the one distinguished pole gives a positive spectral sum over all indices
+other than $0$. This is needed to exclude extra trivial eigenvalues as well as ordinary
+outliers. The scalar linearization and the two corrections obey a proved global cancellation
+estimate, including near $\tau_d$; a pole-separation assumption is not imposed.
+
+\begin{lstlisting}
+SpectralConsequences.actual_depth_trivial_correction_cancellation
+SpectralConsequences.eventually_source_pole_scale_quadratic
+SpectralConsequences.RegularGraph.cavity_boundary_all_label_weights
+SpectralConsequences.RegularGraph.full_boundary_offdiag_correction
+\end{lstlisting}
+In particular $\Psi(z)|\pi_N(z)|\leq C_{d,B}\varepsilon(z)^2$ on a bounded spectral domain.
+Near $\tau_d$, the edge distance is positive; away from $\tau_d$, the fractional error
+floor controls the inverse sample size. This turns the q-to-physical correction change
+into a quadratic drift cost.
+
+\subsection{Sampling geometry and exits}
+
+The resampling probability space includes both the uniformly random boundary labeling
+and the genuine independent edge-sampling fiber. Its switching map is reversible.
+Large protected tree patches imply actual acceptance of every label and preserve the
+same-radius excess bound and the root tree event. These are deterministic statements
+about the literal resampled graph, not assumed good-gadget conclusions.
+
+At the smaller work parameter, two separate graph-count auxiliaries are used. The larger
+radius count bounds the failure of protected sampling; the smaller count preserves the
+original work bad-center threshold after switching. Both auxiliary complements have every
+polynomial graph-probability tail. The conditional geometric exit probability is at most
+$N^{-9/32}$. The auxiliary exponents are not used as a replacement for the target structural
+bad-count exponent.
+
+\begin{lstlisting}
+SpectralConsequences.RegularGraph.eventually_source_geometric_switch_exit_concrete
+SpectralConsequences.LabelledResamplingState.ProtectedPatches.same_radius_excess
+SpectralConsequences.LabelledResamplingState.ProtectedPatches.same_radius_root_tree
+\end{lstlisting}
+
+\subsection{What enters the genuine moment recurrence}
+
+The high-moment argument uses the complex test
+$T_p(F)=F^{p-1}\overline F^{\,p}$, so that $F T_p(F)=|F|^{2p}$.
+Exact finite disintegration lifts actual conditional entry means to the labelled-ball
+kernel. The resulting source drift integral for either observable is bounded by
+\[
+ C(\log N)^{6a+7}\varepsilon^2\,
+      \EE[\mathbf1_{\Om}|F|^{2p-1}]
+ +C M^{2p-1}N^{-D} .
+ \tag{5}
+\]
+The second term is a proved auxiliary-event loss. Uniform switched local caps are derived
+from the old event for \emph{every} sampling assignment, so exceptional samples do not
+require an unproved new-graph resolvent cap.
+
+On both old and new source events, genuine Ward estimates bound the corrected global
+increments by
+\[
+ V=C_{d,B}(\log N)^{2a}
+        \frac{\im m_d+\varepsilon+\Psi}{N\eta}.
+ \tag{6}
+\]
+The same variance satisfies $0\leq V\leq\varepsilon/(\log N)^{16}\leq\varepsilon$.
+Actual local observable increments are bounded by a fixed logarithmic multiple of
+$\varepsilon$. The exit integral is controlled separately, using the polynomial geometric
+exit and all-power weak-event/auxiliary failures. The recurrence keeps the mixed
+$\varepsilon_{\rm loc}V$ scale; it does not replace it by a first-order local-law error.
+This proved Section 7 generalization retains fixed logarithmic losses, including
+$(\log N)^{6a+7}\varepsilon^2$. They are absorbed into $N^e$ in the weak-rigidity argument.
+It is not a claim of the printed log-free sharp Proposition 7.5 estimate.
+
+\begin{lstlisting}
+SpectralConsequences.global_reversible_moment_recurrence
+SpectralConsequences.RegularGraph.eventually_source_moment_drift_integral
+SpectralConsequences.RegularGraph.eventually_source_ward_variance_bound
+SpectralConsequences.RegularGraph.eventually_source_ward_variance_small
+SpectralConsequences.source_actual_high_moment_bounds
+\end{lstlisting}
+The actual source high-moment family, its physical-tail bridge, and the final rigidity
+wrapper are checked. The reversible adapter requires increment bounds only on the nonzero
+support of the actual sampling law; zero-weight auxiliary states do not introduce a spurious
+hypothesis. No intermediate moment or residual-tail predicate remains as a hypothesis of
+the final main theorem. \ifIntegratedAudit The independent integrated rebuild and
+trust-level-zero kernel replay have also passed.\else The fresh integrated rebuild and
+trust-level-zero kernel replay remain the publication gate.\fi
+
+\section{The final weak-rigidity source statement}
+
+For the original conditioning exponent $c$, set
+\[
+ c_{\rm aux}=\min(c/2,1/4),\qquad
+ \beta=\frac{c_{\rm aux}}{256},\qquad
+ \alpha=\frac{\beta}{32}=\frac{\min(c/2,1/4)}{8192}>0.
+\]
+The source reduction uses $a=12$, $b=300$. Confinement from the corrected physical trace,
+combined with the checked counting law and (4), gives the weak-rigidity conclusion
+\[
+ \max_{1\leq i<N}|\lambda_i-\gamma_i|\leq N^{-\alpha}
+\]
+with the all-polynomial conditional bound (1). This is a weak positive-power rate, not the
+optimal edge $N^{-2/3}$ scale. The original conditioning event and its original radius
+remain in the final denominator, although the proof works internally at smaller radii.
+
+The final public declarations are
+\begin{lstlisting}
+SpectralConsequences.full_paper_theorem_1_2
+SpectralConsequences.full_paper_theorem_1_2_ratio
+SpectralConsequences.paper_classical_location_tail_integral
+\end{lstlisting}
+They are in \code{FullPaperTheorems.lean} and have only the numerical hypotheses
+$d\geq3$, $0<c<1$, followed by eventual ensemble nonemptiness. They explicitly supply
+$\alpha>0$, retain multiplicities, and use the literal one-based range $2\leq i\leq N$.
+The primary form uses uniform measure on \code{PaperGraph}; the ratio companion is exactly
+equal to it by the proved conditioning identity. Earlier declarations such as
+\code{canonical_source_rigidity_of_residual_tails} remain useful intermediate composition
+lemmas, but their residual-tail hypothesis is discharged in the final theorem.
+
+\section{How to check and navigate the Lean development}
+\begingroup\small\setlength{\parskip}{4pt}
+
+The root directories \code{LocalLaw/} and \code{SpectralConsequences/} contain the
+local-law foundation and the spectral developments.\\
+Final statements: \code{FullPaperTheorems.lean}.\\
+Corrected all-core maximum: \code{PaperReferenceThreshold.lean}.\\
+Each library's \code{Main.lean} and \code{Audit.lean} register its sources and query
+principal theorem axioms.\\
+Ward: \code{EigenvectorWard.lean}; counting: \code{CDFComparison.lean};\\
+Section 7: \code{SourceMomentObservables.lean}.
+
+From the repository root, the full check is
+\begin{lstlisting}
+lake exe cache get
+lake env python3 scripts/check.py --kernel
+\end{lstlisting}
+With compiled dependencies installed, \code{./check.sh --kernel} runs the same checker.\\
+See \code{docs/BUILDING.md} for dependency overrides and offline use. Under \code{docs/},
+\code{public-statements.txt}, \code{proof-map.txt}, and \code{paper-match-audit.txt}
+give the exact types, proof map, and source comparison.
+
+The pinned Lean toolchain is 4.19.0 with its compatible Mathlib cache. The claimed
+source declarations use only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}.
+The checker replays safe project declarations into a Mathlib base environment at kernel
+trust level zero. Lean's official replay excludes unsafe/partial compiler auxiliaries;
+all theorem proof terms are included in the safe mathematical declarations checked.
+There are no custom axioms, \code{sorry} placeholders, or assumed source mean/drift/exit
+certificates in these completed components. The source files and their audited declarations,
+rather than an informal proof outline, determine the exact checked statements.
+\endgroup
+
+\end{document}

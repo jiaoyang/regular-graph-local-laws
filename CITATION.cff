@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite the mathematical article underlying this formalization."
+title: "Random regular graph local laws in Lean"
+type: software
+version: 0.1.0
+license: MIT
+authors:
+  - name: "Project contributors"
+preferred-citation:
+  type: article
+  title: "Spectrum of Random d-regular Graphs Up to the Edge"
+  authors:
+    - family-names: Huang
+      given-names: Jiaoyang
+    - family-names: Yau
+      given-names: Horng-Tzer
+  year: 2025
+  date-published: 2025-02-02
+  url: "https://arxiv.org/abs/2102.00963v3"

@@ -1,0 +1,69 @@
+SpectralConsequences.source_theorem_1_2 : ∀ (d : ℕ) (c : ℝ) (hd : 3 ≤ d),
+  0 < c →
+    c < 1 →
+      ∀ (D : ℕ),
+        ∀ᶠ (N : ℕ) in Filter.atTop,
+          Nonempty (LocalLaw.RegularGraph N d) →
+            (LocalLaw.eventMass LocalLaw.RegularGraph.weight fun g =>
+                  LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                      ⌊↑N ^ c⌋₊ g ∧
+                    ¬SpectralConsequences.SourceRigid hd (SpectralConsequences.canonicalRigidityExponent c) g) /
+                LocalLaw.eventMass LocalLaw.RegularGraph.weight
+                  (LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                    ⌊↑N ^ c⌋₊) ≤
+              1 / ↑N ^ D
+SpectralConsequences.source_theorem_1_2_positive_rate : ∀ (d : ℕ) (c : ℝ) (hd : 3 ≤ d),
+  0 < c →
+    c < 1 →
+      ∃ α,
+        0 < α ∧
+          ∀ (D : ℕ),
+            ∀ᶠ (N : ℕ) in Filter.atTop,
+              Nonempty (LocalLaw.RegularGraph N d) →
+                (LocalLaw.eventMass LocalLaw.RegularGraph.weight fun g =>
+                      LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                          ⌊↑N ^ c⌋₊ g ∧
+                        ¬SpectralConsequences.SourceRigid hd α g) /
+                    LocalLaw.eventMass LocalLaw.RegularGraph.weight
+                      (LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N)
+                        (LocalLaw.finiteOmega d) ⌊↑N ^ c⌋₊) ≤
+                  1 / ↑N ^ D
+SpectralConsequences.source_theorem_1_4 : ∀ (d : ℕ) (c : ℝ),
+  3 ≤ d →
+    0 < c →
+      c < 1 →
+        ∀ (D : ℕ),
+          ∀ᶠ (N : ℕ) in Filter.atTop,
+            Nonempty (LocalLaw.RegularGraph N d) →
+              (LocalLaw.eventMass LocalLaw.RegularGraph.weight fun g =>
+                    LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                        ⌊↑N ^ c⌋₊ g ∧
+                      ¬SpectralConsequences.SourceDelocalized g) /
+                  LocalLaw.eventMass LocalLaw.RegularGraph.weight
+                    (LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                      ⌊↑N ^ c⌋₊) ≤
+                1 / ↑N ^ D
+SpectralConsequences.source_theorem_1_4_supnorm : ∀ (d : ℕ) (c : ℝ),
+  3 ≤ d →
+    0 < c →
+      c < 1 →
+        ∀ (D : ℕ),
+          ∀ᶠ (N : ℕ) in Filter.atTop,
+            Nonempty (LocalLaw.RegularGraph N d) →
+              (LocalLaw.eventMass LocalLaw.RegularGraph.weight fun g =>
+                    LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                        ⌊↑N ^ c⌋₊ g ∧
+                      ¬SpectralConsequences.SourceNormalizedDelocalized g) /
+                  LocalLaw.eventMass LocalLaw.RegularGraph.weight
+                    (LocalLaw.RegularGraph.structural (LocalLaw.logarithmicRadius (c / 4) d N) (LocalLaw.finiteOmega d)
+                      ⌊↑N ^ c⌋₊) ≤
+                1 / ↑N ^ D
+SpectralConsequences.source_actual_high_moment_bounds : ∀ (a b d : ℕ) (c β B : ℝ),
+  12 ≤ a →
+    25 * a ≤ b →
+      3 ≤ d →
+        0 < c → c ≤ 1 / 16 → 0 < β → β ≤ c / 32 → 2 * ↑d ≤ B → SpectralConsequences.SourceHighMomentBounds a b d c β B
+'SpectralConsequences.source_theorem_1_2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.source_theorem_1_4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.source_theorem_1_4_supnorm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SpectralConsequences.source_actual_high_moment_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]

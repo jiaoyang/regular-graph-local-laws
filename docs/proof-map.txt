@@ -1,0 +1,83 @@
+FINAL PAPER-FORM ENTRY POINTS
+
+FullPaperTheorems.full_paper_theorem_1_2 / full_paper_theorem_1_4
+  PaperReferenceThreshold.paperOmega:
+    independently chosen maximal literal possibly-infinite-core reference class
+    PaperComplexity:finite actual feedback edges deleting to a forest,
+      finite original deficit support and exact sum/cardinality budget
+    AllCorePaperComplexity:literal witness ->hereditary finite-core budgets;
+      each finite connected core supplies an exact-excess witness
+    AllCoreReferenceLimit:finite estimates ->ALL genuine infinite-core Green bounds
+      AllCoreExhaustion:connected finite BFS balls, full-star retention
+      AllCoreFiniteSupport / AllCoreFiniteSupportGreen:actual finite inherited-
+        deficit core extensions, no reference estimates applied to padded ambient
+      AllCorePaddedExtension / AllCorePaddedEmbedding / GraphGreenEmbedding:
+        neighbor-closed isometric component transport of actual Green functions
+      LocalGraphResolventLimit / LocalLaw.SelfAdjointResolventLimit:
+        uniform-degree strong adjacency convergence, actual inverse convergence
+    paperReferenceThreshold_iff_finite, paperOmega_eq_finiteOmega:PROVED
+  PaperEvent:real radius/count ->exact integer-floor structural predicate;
+    conditional uniform ratio =actual uniform structural-subtype measure
+  PaperConditionalTransfer:original threshold denominator>=1/2, real C powers
+  PaperTheorem12:one-based2..N ranks, actual KM integral quantiles, positive rate
+  PaperTheorem14 / PaperAllEigenvectors:coefficient-one log151 bound, genuine
+    infinity/Euclidean norms, ALL complex eigenpairs, no normalization premise
+  FullPaperTheorems:nonempty structural subtype proved, both conditional forms
+
+SOURCE CORRECTION IS EXPLICIT
+  PaperDefinitionSanity:no global positive diagonal lower bound on ALL C+
+    because the actual resolvent has norm<=1/Im(z).
+  PaperReferenceThreshold uses the consistent relative-|md| lower bound;
+    PaperBoundedReference derives constant comparability on bounded regions.
+  No identity with the impossible printed all-z constant lower bound is claimed.
+
+EARLIER INTERNAL SPECTRAL CHAIN (file-qualified names below identify modules;
+all declarations themselves are in namespace SpectralConsequences)
+
+PROOF MAP
+
+SourceTheorem12.source_theorem_1_2
+  SourceActualHighMoments.source_actual_high_moment_bounds
+    SourceMomentRecurrence.eventually_source_moment_recurrence
+      GlobalReversibleMomentBound / SupportedReversibleMoment
+      SourceMomentDriftIntegral / SourceMomentExitIntegral
+      SourceMomentSiteInputs / SourceSparseMomentInputs
+      SourceLocalObservableChanges / SourceWardVarianceBound
+    ThreeTermFluctuationBound / MomentExceptionAbsorption
+  SourceMomentTailBridge.source_high_moments_imply_exterior_tails
+    PolynomialMomentMarkov / MomentExteriorScaleComparison
+  SourceRigidityReduction / OriginalExteriorProbability
+    SourceWeakProbability / WorkTreeCountAuxiliary
+    SourceExteriorResidualBound / SourceCorrectedResiduals
+      CorrectedTraceStability / CorrectedCavityStability
+      RegularRootTaylor / TrivialCorrectionSpectral
+    SourceExteriorConfinement / ExteriorMesh / SourceCorrectedTrace
+      actual sorted spectrum; one constant-vector mode; positive Poisson sum
+    SourceCountingProbability / SourceCountingRate / CDFComparison
+      completed Theorem4.2; actual Poisson smoothing and normalized KM density
+    QuantileRigidity / KestenMcKayQuantiles / SourceRigidityAssembly
+      actual classical locations; lower interval mass exponent3/2
+
+SourceTheorem14Canonical.source_theorem_1_4 / source_theorem_1_4_supnorm
+  SourceTheorem14 / SourceDelocalizationSupnorm
+  SourceDiagonalCap / EigenvectorWard
+  completed LocalLaw.SourceTheorem42
+
+Key Section7 geometry and probability:
+  ProtectedSameRadiusLocalization: actual same-radius excess and root-tree
+    preservation, with no larger-radius excess certificate assumed.
+  SourceGeometricSwitchExit: sampling exit bound retains the ORIGINAL
+    work bad-count threshold. Separate large and small auxiliaries have
+    all-polynomial exceptional tails.
+  BallComplexDisintegration / CanonicalBallResampling / CanonicalBallSupport:
+    actual random graph, boundary-label and local-sample means; zero-weight
+    states handled explicitly before reversible increment estimates.
+  SourceBoundaryConditionalMeans and physical cavity/trace drift modules:
+    genuine matrix inverses, sampled minors, finite Schur expansions and
+    actual conditional means; no new-graph regularity event assumed for
+    all-sample caps or conditional drift.
+
+All final public results use only the standard Lean axioms propext,
+Classical.choice, and Quot.sound. Main.lean explicitly registers every module;
+Audit.lean prints the key dependency axioms, including the actual high moments
+and both completed source theorem statements.

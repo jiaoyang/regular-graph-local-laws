@@ -1,0 +1,25 @@
+# Lean, Lake and Python build products
+.lake/
+**/.lake/
+__pycache__/
+*.py[cod]
+*.olean
+*.ilean
+*.trace
+*.hash
+
+# Local research workspace and release archives
+/outputs/
+/work/
+/tmp/
+/.local/
+*.zip
+.DS_Store
+
+# TeX intermediates (the checked guide PDF and source are tracked)
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.log
+*.synctex.gz
